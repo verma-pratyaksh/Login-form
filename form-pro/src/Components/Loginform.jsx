@@ -6,14 +6,15 @@ const Loginform = () => {
   const [errors, setErrors] = useState({ username: '', password: '' });
   const [showPassword, setShowPassword] = useState(false);
 
-  // Validation functions
+  // Validation functions  
   const validateEmail = (email) => {
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return emailPattern.test(email);
   };
 
   const validatePassword = (password) => {
-    return password.length >= 6;
+    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+    return passwordPattern.test(password);
   };
 
   // Handle input change and validate onChange
@@ -23,9 +24,12 @@ const Loginform = () => {
 
     // Inline validation as the user types
     if (name === 'username') {
-      setErrors({ ...errors, username: validateEmail(value) ? '' : 'Invalid email format' });
+      setErrors({ ...errors, username: value ? (validateEmail(value) ? '' : 'Invalid email format') : 'This field is required' });
     } else if (name === 'password') {
-      setErrors({ ...errors, password: validatePassword(value) ? '' : 'Password must be at least 6 characters' });
+      setErrors({
+        ...errors,
+        password: value ? (validatePassword(value) ? '' : 'Password must be at least 6 characters and include uppercase, lowercase, number, and special character') : 'This field is required'
+      });
     }
   };
 
@@ -33,10 +37,13 @@ const Loginform = () => {
   const handleBlur = (e) => {
     const { name, value } = e.target;
 
-    if (name === 'username' && !validateEmail(value)) {
-      setErrors({ ...errors, username: 'Invalid email format' });
-    } else if (name === 'password' && !validatePassword(value)) {
-      setErrors({ ...errors, password: 'Password must be at least 6 characters' });
+    if (name === 'username') {
+      setErrors({ ...errors, username: value ? (validateEmail(value) ? '' : 'Invalid email format') : 'This field is required' });
+    } else if (name === 'password') {
+      setErrors({
+        ...errors,
+        password: value ? (validatePassword(value) ? '' : 'Password must be at least 6 characters and include uppercase, lowercase, number, and special character') : 'This field is required'
+      });
     }
   };
 
@@ -104,10 +111,9 @@ const Loginform = () => {
         <button type="submit" className="btn">Log In</button>
 
         <button type="button" className="btn btn-google">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google logo" width="16" />
-  Log in with Google
-</button>
-
+          <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google logo" width="16" />
+          Log in with Google
+        </button>
 
         <div className="footer">
           Don’t have an account? <a href="#">Sign Up</a>
