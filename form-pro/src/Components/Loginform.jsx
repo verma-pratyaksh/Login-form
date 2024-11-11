@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import './Loginform.css';
 
 const Loginform = () => {
-  const [formData, setFormData] = useState({ username: '', password: '' });
-  const [errors, setErrors] = useState({ username: '', password: '' });
+  const [formData, setFormData] = useState({ email: '', password: '' });
+  const [errors, setErrors] = useState({ email: '', password: '' });
   const [showPassword, setShowPassword] = useState(false);
 
-  // Validation functions  
+  // Validation functions
   const validateEmail = (email) => {
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return emailPattern.test(email);
@@ -23,8 +23,8 @@ const Loginform = () => {
     setFormData({ ...formData, [name]: value });
 
     // Inline validation as the user types
-    if (name === 'username') {
-      setErrors({ ...errors, username: value ? (validateEmail(value) ? '' : 'Invalid email format') : 'This field is required' });
+    if (name === 'email') {
+      setErrors({ ...errors, email: value ? (validateEmail(value) ? '' : 'Invalid email format') : 'This field is required' });
     } else if (name === 'password') {
       setErrors({
         ...errors,
@@ -37,8 +37,8 @@ const Loginform = () => {
   const handleBlur = (e) => {
     const { name, value } = e.target;
 
-    if (name === 'username') {
-      setErrors({ ...errors, username: value ? (validateEmail(value) ? '' : 'Invalid email format') : 'This field is required' });
+    if (name === 'email') {
+      setErrors({ ...errors, email: value ? (validateEmail(value) ? '' : 'Invalid email format') : 'This field is required' });
     } else if (name === 'password') {
       setErrors({
         ...errors,
@@ -51,7 +51,7 @@ const Loginform = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Final validation check before submission
-    if (!validateEmail(formData.username) || !validatePassword(formData.password)) {
+    if (!validateEmail(formData.email) || !validatePassword(formData.password)) {
       alert('Please correct the errors before submitting');
       return;
     }
@@ -67,7 +67,6 @@ const Loginform = () => {
 
   return (
     <div className="login-container">
-      <div className="logo">✈</div>
       <h2>Welcome back!</h2>
       <p>Please enter your details</p>
 
@@ -75,14 +74,14 @@ const Loginform = () => {
         <div className="input-field">
           <input
             type="email"
-            name="Email"
+            name="email"
             placeholder="Email"
-            value={formData.username}
+            value={formData.email}
             onChange={handleChange}
             onBlur={handleBlur}
             required
           />
-          {errors.username && <div className="error">{errors.username}</div>}
+          {errors.email && <div className="error">{errors.email}</div>}
         </div>
 
         <div className="input-field password-container">
