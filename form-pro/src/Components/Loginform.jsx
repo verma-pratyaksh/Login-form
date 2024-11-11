@@ -75,7 +75,7 @@ const Loginform = () => {
         <div className="input-field">
           <input
             type="email"
-            name="username"
+            name="Email"
             placeholder="Email"
             value={formData.username}
             onChange={handleChange}
