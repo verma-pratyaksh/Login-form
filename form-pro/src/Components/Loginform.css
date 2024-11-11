@@ -22,6 +22,16 @@
     border-radius: 8px;
 
   }
+  .logo {
+    width: 100px; /* Adjust size as needed */
+    height: 100px;
+    margin-bottom: 5px; /* Spacing between logo and heading */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1px;
+  }
+  
   
  
   

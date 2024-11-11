@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import './Loginform.css';
+import logo from '../assets/logo.png';
+
 
 const Loginform = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
@@ -22,7 +24,6 @@ const Loginform = () => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
 
-    // Inline validation as the user types
     if (name === 'email') {
       setErrors({ ...errors, email: value ? (validateEmail(value) ? '' : 'Invalid email format') : 'This field is required' });
     } else if (name === 'password') {
@@ -50,14 +51,12 @@ const Loginform = () => {
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Final validation check before submission
     if (!validateEmail(formData.email) || !validatePassword(formData.password)) {
       alert('Please correct the errors before submitting');
       return;
     }
 
     alert('Form submitted successfully!');
-    // Perform login logic here
   };
 
   // Toggle password visibility
@@ -67,6 +66,7 @@ const Loginform = () => {
 
   return (
     <div className="login-container">
+      <img src={logo} alt="Logo" className="logo" /> {/* Logo image here */}
       <h2>Welcome back!</h2>
       <p>Please enter your details</p>
 
